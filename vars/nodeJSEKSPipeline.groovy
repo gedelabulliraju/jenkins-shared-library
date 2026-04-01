@@ -85,7 +85,7 @@ def call(Map configMap) {
                 //     expression { params.deploy }
                 // }
                 steps {
-                    build job: "backend-cd", parameters: [
+                    build job: "EXPENSE/backend/backend-cd", parameters: [
                         string(name: 'Version', value: "${appVersion}"),
                         string(name: 'environment', value: 'dev'),
                     ], wait: true
