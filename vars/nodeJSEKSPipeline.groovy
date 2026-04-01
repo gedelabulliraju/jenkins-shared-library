@@ -12,7 +12,7 @@ def call(Map configMap) {
             account_id = "017183880052"
             region = "us-east-1"
             project = configMap.get("project")
-            environment = "dev"
+            envName = "dev"
             component = configMap.get("component")
         }
     
@@ -73,9 +73,9 @@ def call(Map configMap) {
                     withAWS(region: 'us-east-1', credentials: 'aws-creds') {
                         script {
                             sh "aws ecr get-login-password --region ${region} | docker login --username AWS --password-stdin ${account_id}.dkr.ecr.${region}.amazonaws.com"
-                            sh "docker build -t ${project}/${environment}/${component}:${appVersion} ."
-                            sh "docker tag ${project}/${environment}/${component}:${appVersion} ${account_id}.dkr.ecr.${region}.amazonaws.com/${project}/${environment}/${component}:${appVersion}"
-                            sh "docker push ${account_id}.dkr.ecr.${region}.amazonaws.com/${project}/${environment}/${component}:${appVersion}"
+                            sh "docker build -t ${project}/${envName}/${component}:${appVersion} ."
+                            sh "docker tag ${project}/${envName}/${component}:${appVersion} ${account_id}.dkr.ecr.${region}.amazonaws.com/${project}/${envName}/${component}:${appVersion}"
+                            sh "docker push ${account_id}.dkr.ecr.${region}.amazonaws.com/${project}/${envName}/${component}:${appVersion}"
                         }
                     }
                 }
