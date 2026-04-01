@@ -11,9 +11,9 @@ def call(Map configMap) {
             appVersion = '' // Can be set dynamically during the pipeline
             account_id = "017183880052"
             region = "us-east-1"
-            project = "configMap.get('project')"
+            project = configMap.get("project")
             environment = "dev"
-            component = "configMap.get('component')"
+            component = configMap.get("component")
         }
     
         stages {
