@@ -15,7 +15,7 @@ def call(Map configMap) {
             account_id = "017183880052"
             region = "us-east-1"
             project = configMap.get("project")
-            envName = "backend"
+            envName = "dev"
             component = configMap.get("component")
         }
     
