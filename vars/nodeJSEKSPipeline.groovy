@@ -12,10 +12,10 @@ def call(Map configMap) {
         }
         environment { 
             appVersion = '' // Can be set dynamically during the pipeline
-            account_id = ""
+            account_id = "017183880052"
             region = "us-east-1"
             project = configMap.get("project")
-            envName = ""
+            envName = "backend"
             component = configMap.get("component")
         }
     
