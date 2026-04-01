@@ -7,12 +7,15 @@ def call(Map configMap) {
             timeout(time: 10, unit: 'MINUTES') // Timeout after 10 minutes
             disableConcurrentBuilds() // Prevent concurrent builds
         }
+        parameters {
+            booleanParam(name: 'deploy', defaultValue: false, description: 'Select to deploy the application after build')
+        }
         environment { 
             appVersion = '' // Can be set dynamically during the pipeline
-            account_id = "017183880052"
+            account_id = ""
             region = "us-east-1"
             project = configMap.get("project")
-            envName = "dev"
+            envName = ""
             component = configMap.get("component")
         }
     
@@ -81,11 +84,11 @@ def call(Map configMap) {
                 }
             }
             stage('Deploy') {
-                // when {
-                //     expression { params.deploy }
-                // }
+                 when {
+                    expression { params.deploy }
+                }
                 steps {
-                    build job: "EXPENSE/backend/backend-cd", parameters: [
+                    build job: "EXPENSE/backend/${component}-cd", parameters: [
                         string(name: 'Version', value: "${appVersion}"),
                         string(name: 'environment', value: 'dev'),
                     ], wait: true
