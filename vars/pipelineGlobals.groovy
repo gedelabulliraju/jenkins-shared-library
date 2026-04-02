@@ -11,6 +11,6 @@ def getAccountId(String environment) {
         case "prod":
             return "017183880052"
         default:
-            throw new IllegalArgumentException("Unknown environment: ${envName}")
+            throw new IllegalArgumentException("Unknown environment: ${environment}")
     }
 }
