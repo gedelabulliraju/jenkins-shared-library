@@ -8,7 +8,8 @@ def call(Map configMap) {
             disableConcurrentBuilds() // Prevent concurrent builds
         }
         parameters {
-            booleanParam(name: 'deploy', defaultValue: false, description: 'Select to deploy the application after build')
+            choice(name: "environment", choices: ["dev","qa","uat","pre-prod","prod"], description: "Select environment")
+            booleanParam(name: 'deploy', defaultValue: false, description: 'Deploy?')
         }
         environment { 
             appVersion = '' // Can be set dynamically during the pipeline
