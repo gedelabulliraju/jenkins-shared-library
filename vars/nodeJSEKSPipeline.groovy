@@ -20,6 +20,14 @@ def call(Map configMap) {
         }
     
         stages {
+            stage('Set Environment') {
+                steps {
+                    script {
+                        environment = params.environment
+                        account_id = pipelineGlobals.getAccountId(environment)
+                    }
+                }
+            }
             stage('Read the app version') {
                 steps {
                     script {
